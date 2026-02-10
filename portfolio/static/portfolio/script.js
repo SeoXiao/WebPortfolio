@@ -321,6 +321,15 @@ function openContactModal() {
     
     // Reset form
     resetContactForm();
+
+    if (modalContainer) {
+        // Wait a tiny bit for the modal to render, then scroll to top
+        setTimeout(() => {
+            modalContainer.scrollTop = 0;
+            // Also try smooth scroll
+            modalContainer.scrollTo({ top: 0, behavior: 'instant' });
+        }, 50);
+    }
 }
 
 function closeContactModal() {
@@ -331,6 +340,11 @@ function closeContactModal() {
 }
 
 function resetContactForm() {
+    const modalContainer = document.querySelector('.project-modal.contact-modal');
+    if (modalContainer) {
+        modalContainer.scrollTop = 0;
+    }
+
     document.getElementById('contactForm').reset();
     document.getElementById('form-response').innerHTML = '';
     document.getElementById('form-response').className = 'form-response';
